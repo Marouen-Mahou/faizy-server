@@ -18,9 +18,6 @@ const mongoose = require("mongoose");
 //Register schemas
 require("./models/postModel");
 
-
-console.log("Database_URL", process.env.SERVER_URI);
-
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.SERVER_URI,
 {useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex:true,}).catch((err) => {
