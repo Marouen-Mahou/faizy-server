@@ -19,7 +19,7 @@ const mongoose = require("mongoose");
 require("./models/postModel");
 
 
-console.log("Database_URL", process.env.DATABASE_URL);
+console.log("Database_URL", process.env.SERVER_URI);
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.SERVER_URI,
