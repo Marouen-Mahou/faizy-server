@@ -2,13 +2,12 @@
 var mongoose = require("mongoose");
 const Post = mongoose.model('Post');
 
-// Get Configuration of a license
 exports.addLike = async function (req, res){
     try {
       const post = await Post.findOne({postId: req.body.postId})
 
       if(post) {
-        const updatedPost = await Post.findOneAndUpdate({postId: req.body.postId}, {likes: req.body.likes + 1}, {new: true})
+        const updatedPost = await Post.findOneAndUpdate({postId: req.body.postId}, {likes: post.likes + 1}, {new: true})
         return res.status(200).json(updatedPost)
       } else {
         return res.status(408).send('PostId not found');
@@ -16,6 +15,21 @@ exports.addLike = async function (req, res){
     } catch (error) {
       return res.status(500).send(error);
     }
+}
+
+exports.subtractLike = async function (req, res){
+  try {
+    const post = await Post.findOne({postId: req.body.postId})
+
+    if(post) {
+      const updatedPost = await Post.findOneAndUpdate({postId: req.body.postId}, {likes: post.likes - 1}, {new: true})
+      return res.status(200).json(updatedPost)
+    } else {
+      return res.status(408).send('PostId not found');
+    }
+  } catch (error) {
+    return res.status(500).send(error);
+  }
 }
 
 exports.createPost = async function (req, res) {
