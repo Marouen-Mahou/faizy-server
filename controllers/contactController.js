@@ -8,8 +8,8 @@ exports.sendEmail = async function (req, res){
       service: 'gmail',
       host: 'smtp.gmail.com',
         auth: {
-        user: 'faizynoreply@gmail.com', 
-        pass: 'faizy123456', 
+        user: process.env.EMAIL, 
+        pass: process.env.PASSWORD, 
         },
     }));
 
